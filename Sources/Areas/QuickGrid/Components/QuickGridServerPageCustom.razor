@@ -1,0 +1,36 @@
+﻿@page "/servercustom"
+@using Microsoft.AspNetCore.Components.QuickGrid
+
+<input type="button" value="Test" @onclick="Click" />
+
+<div class="page-size-chooser">
+    Items per page:
+    <select @bind="@pagination.ItemsPerPage">
+        <option>5</option>
+        <option>10</option>
+        <option>20</option>
+        <option>50</option>
+    </select>
+</div>
+
+<div class="grid">
+    <QuickGrid Items="@Individuals" Pagination="@pagination">
+        <PropertyColumn Property="@(c => c.FirstName)" Sortable="true" Class="country-name">
+            <ColumnOptions>
+                <div class="search-box">
+                    <input type="search" autofocus @bind="FirstNameFilter.Value" @bind:event="oninput" placeholder="Text..." />
+                </div>
+            </ColumnOptions>
+        </PropertyColumn>
+
+        <PropertyColumn Property="@(c => c.BirthDate)" Sortable="true">
+            <ColumnOptions>
+                    <input type="date" autofocus @bind="BirthdateFilter.Value" @bind:event="oninput" placeholder="Datum..."/>
+       
+            </ColumnOptions>
+        </PropertyColumn>
+
+    </QuickGrid>
+</div>
+
+<Paginator State="@pagination"/>

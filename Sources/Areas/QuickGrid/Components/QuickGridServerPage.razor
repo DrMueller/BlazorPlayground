@@ -1,0 +1,67 @@
+﻿@page "/server"
+@using BlazorPlayground.Infrastructure.Data.DbContexts.Contexts.Implementation
+@using BlazorPlayground.Infrastructure.Data.DbContexts.Factories.Implementation
+@using BlazorPlayground.Infrastructure.Data.Models
+@using Microsoft.AspNetCore.Components.QuickGrid
+
+<input type="button" value="Test" @onclick="Click" />
+
+<div class="page-size-chooser">
+    Items per page:
+    <select @bind="@pagination.ItemsPerPage">
+        <option>5</option>
+        <option>10</option>
+        <option>20</option>
+        <option>50</option>
+    </select>
+</div>
+
+<div class="grid">
+    <QuickGrid Items="@FilteredIndividuals" Pagination="@pagination">
+        <PropertyColumn Property="@(c => c.FirstName)" Sortable="true" Class="country-name">
+            <ColumnOptions>
+                <div class="search-box">
+                    <input type="search" autofocus @bind="firstNameFilter" @bind:event="oninput" placeholder="Country name..." />
+                </div>
+            </ColumnOptions>
+        </PropertyColumn>
+
+    </QuickGrid>
+</div>
+
+<Paginator State="@pagination"/>
+
+@code {
+    readonly PaginationState pagination = new() { ItemsPerPage = 10 };
+    IQueryable<Individual>? itemsQueryable;
+    private AppDbContext _appDbContext;
+
+    private string firstNameFilter = string.Empty;
+
+    protected override async Task OnInitializedAsync()
+    {
+        _appDbContext = AppDbContextFactory.Create();
+        itemsQueryable = _appDbContext.Set<Individual>().AsQueryable();
+    }
+
+    IQueryable<Individual> FilteredIndividuals
+    {
+        get
+        {
+            var result = itemsQueryable;
+
+            if (!string.IsNullOrEmpty(firstNameFilter))
+            {
+                result = result.Where(f => f.FirstName.Contains(firstNameFilter));
+            }
+     
+            return result;
+        }
+    }
+
+    private void Click()
+    {
+        _appDbContext.Set<Individual>().Take(10).ToList();
+    }
+
+}
