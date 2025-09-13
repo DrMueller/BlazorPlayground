@@ -4,7 +4,7 @@ namespace BlazorPlayground.Areas.Bootstrap.LazyTabs.Shared;
 
 public partial class LazyTabs
 {
-    public IList<LazyTab> LazyTabsList { get; } = new List<LazyTab>();
+    private IList<LazyTab> LazyTabsList { get; } = new List<LazyTab>();
 
     [Parameter] public required RenderFragment ChildContent { get; set; }
 

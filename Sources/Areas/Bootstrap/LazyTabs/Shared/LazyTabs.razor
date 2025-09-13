@@ -1,4 +1,5 @@
 ﻿@using BlazorBootstrap
+
 <CascadingValue Value="@(this)" IsFixed="true">
     @ChildContent
 </CascadingValue>
@@ -6,8 +7,10 @@
 <Tabs>
     @foreach (var lt in LazyTabsList)
     {
-        <Tab>
-            @ChildContent
+        <Tab Title="Test" Active="true">
+            <Content>
+                @lt.ChildContent
+            </Content>
         </Tab>
     }
 </Tabs>
