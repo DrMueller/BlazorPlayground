@@ -7,13 +7,18 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+	  <Compile Remove="Areas\Bootstrap\LazyTabs\NewFolder\**" />
 	  <Compile Remove="Areas\QuickGrid\Shared\QuickGrids\**" />
+	  <Content Remove="Areas\Bootstrap\LazyTabs\NewFolder\**" />
 	  <Content Remove="Areas\QuickGrid\Shared\QuickGrids\**" />
+	  <EmbeddedResource Remove="Areas\Bootstrap\LazyTabs\NewFolder\**" />
 	  <EmbeddedResource Remove="Areas\QuickGrid\Shared\QuickGrids\**" />
+	  <None Remove="Areas\Bootstrap\LazyTabs\NewFolder\**" />
 	  <None Remove="Areas\QuickGrid\Shared\QuickGrids\**" />
 	</ItemGroup>
 
 	<ItemGroup>
+		<PackageReference Include="Blazor.Bootstrap" Version="3.4.0" />
 		<PackageReference Include="Microsoft.AspNetCore.Components.QuickGrid" Version="8.0.14" />
 		<PackageReference Include="Microsoft.AspNetCore.Components.QuickGrid.EntityFrameworkAdapter" Version="8.0.14" />
 		<PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="9.0.5" />

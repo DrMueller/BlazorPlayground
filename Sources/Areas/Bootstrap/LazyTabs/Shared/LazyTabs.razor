@@ -1,0 +1,13 @@
+﻿@using BlazorBootstrap
+<CascadingValue Value="@(this)" IsFixed="true">
+    @ChildContent
+</CascadingValue>
+
+<Tabs>
+    @foreach (var lt in LazyTabsList)
+    {
+        <Tab>
+            @ChildContent
+        </Tab>
+    }
+</Tabs>

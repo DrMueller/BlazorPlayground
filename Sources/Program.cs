@@ -13,6 +13,7 @@ builder.Services.AddRazorComponents()
 builder.Services.AddScoped<IIndividualsService, IndividualsService>();
 builder.Services.AddScoped<IJavaScriptLocator, JavaScriptLocator>();
 builder.Services.AddQuickGridEntityFrameworkAdapter();
+builder.Services.AddBlazorBootstrap();
 
 var app = builder.Build();
 
