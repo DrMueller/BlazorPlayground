@@ -9,6 +9,12 @@ public partial class LazyTab
 
     [CascadingParameter] public required LazyTabs Parent { get; set; }
 
+    internal Guid Guid { get; set; } = Guid.NewGuid();
+
+    [Parameter]
+    [EditorRequired]
+    public required string Title { get; set; }
+
     protected override void OnInitialized()
     {
         Parent.AddTab(this);

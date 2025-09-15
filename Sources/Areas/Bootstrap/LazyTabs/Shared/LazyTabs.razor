@@ -1,15 +1,19 @@
 ﻿@using BlazorBootstrap
-
 <CascadingValue Value="@(this)" IsFixed="true">
     @ChildContent
 </CascadingValue>
 
-<Tabs>
+<Tabs OnShowing="HandleShowing">
     @foreach (var lt in LazyTabsList)
     {
-        <Tab Title="Test" Active="true">
+        <Tab Title="@lt.Title" Active="true">
             <Content>
-                @lt.ChildContent
+                @if (LoadedTabs[lt.Guid].WasLoaded)
+                {
+                    <div style="display:@(LoadedTabs[lt.Guid].ActiveCssClass)">
+                        @lt.ChildContent
+                    </div>
+                }
             </Content>
         </Tab>
     }
